@@ -7,8 +7,8 @@ import React from "react";
 import { toast } from "@/hooks/use-toast";
 import axios, { AxiosError } from "axios";
 
-export default function UserPage({ params }: { params: { username: string } }) {
-    const { username } = React.use(params);
+export default function UserPage({ params }: { params: Promise<{ username: string }> }) {
+  const { username } = React.use(params);
     const { register, handleSubmit } = useForm();
 
     const onSubmit = async (data: FieldValues) => {
@@ -27,7 +27,7 @@ export default function UserPage({ params }: { params: { username: string } }) {
        }
     };
   
-    return (
+    return (                               
       <div>
         <h1>Welcome, {username}!</h1>
         <div className="flex items-center justify-center h-screen">

@@ -16,10 +16,8 @@ import { useForm } from 'react-hook-form';
 
 function Page() {
 
-  type message = {
-    _id : string,
-    createdAt : Date,
-    content : string
+  type message = Message & {
+    _id: string;
   }
 
     const [message , setMessages] = useState<Array<Message & { _id: string }>>([])
@@ -186,7 +184,7 @@ function Page() {
         <p>No messages available.</p>
       ) : (
         <ul>
-          {message.messages.map((message: message) => (
+          {message.map((message: message) => (
             <MessageCard
             key={message._id}
             message={message}

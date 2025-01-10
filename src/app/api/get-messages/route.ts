@@ -34,7 +34,7 @@ export async function GET() {
     }
     console.log(user[0])
     return Response.json(
-      { messages: user[0] },
+      { messages: user[0].messages },
       {
         status: 200,
       }
