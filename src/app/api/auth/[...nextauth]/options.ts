@@ -2,6 +2,7 @@ import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcryptjs';
 import dbConnect from '@/lib/dbConnect';
+import { ApiResponse } from '@/types/ApiResponse';
 import UserModel from '@/model/User';
 
 export const authOptions: NextAuthOptions = {
@@ -13,7 +14,7 @@ export const authOptions: NextAuthOptions = {
         email: { label: 'Email', type: 'text' },
         password: { label: 'Password', type: 'password' },
       },
-      async authorize(credentials: any): Promise<any> {
+      async authorize(credentials : any): Promise<any> {
         await dbConnect();
         try {
           const user = await UserModel.findOne({

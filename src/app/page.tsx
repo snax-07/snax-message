@@ -1,9 +1,7 @@
 'use client';
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { Mail } from 'lucide-react'; // Assuming you have an icon for messages
+
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Autoplay from 'embla-carousel-autoplay';
 import messages from '@/messages.json';
@@ -15,6 +13,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
+import { Mail } from 'lucide-react';
 
 export default function Home() {
   return (

@@ -13,8 +13,9 @@ export async function POST(request : Request) {
         return Response.json({
             success : false,
             message : "User not found"
-        } , {status : 404})
+        })
     }
+
 
     //check acceptance
 
@@ -22,7 +23,7 @@ export async function POST(request : Request) {
         return Response.json({
             success : false,
             message : "User is not accepting message"
-        } , {status : 403})
+        } )
     }
 
     const newMessage = {createdAt : new Date() , content}

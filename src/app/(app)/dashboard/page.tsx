@@ -10,19 +10,24 @@ import { ApiResponse } from '@/types/ApiResponse';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios, { AxiosError } from 'axios';
 import { Loader2, RefreshCcw } from 'lucide-react';
-import { User } from 'next-auth';
 import { useSession } from 'next-auth/react';
 import React, { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 
-function page() {
+function Page() {
+
+  type message = {
+    _id : string,
+    createdAt : Date,
+    content : string
+  }
 
     const [message , setMessages] = useState<Array<Message & { _id: string }>>([])
     const [isLoading , setIsLoading] = useState(false);
     const [isSwitchLoading , setIsSwitchLoading] = useState(false)
     const {toast} = useToast()
 
-    const handleDeleteMessage = (messageId: string) :any  => {
+    const handleDeleteMessage = (messageId: string)  => {
       // Filter out the message with the given ID
       setMessages(prevMessages => prevMessages.filter(message => message._id !== messageId));
     };
@@ -58,7 +63,7 @@ function page() {
                 setIsSwitchLoading(false)
 
             }
-    } , [setValue])
+    } , [setValue,toast])
 
     const fetchMessages = useCallback(
       async (refresh: boolean = false) => {
@@ -93,7 +98,7 @@ function page() {
         if(!session || !session.user) return;
         fetchAcceptMessage()
         fetchMessages()
-    } , [session,setValue,fetchAcceptMessage , fetchMessages])
+    } , [session,setValue,fetchAcceptMessage , fetchMessages , toast])
 
     //HANDLING SWITCH CHANGE
     const handleSwitchChange = async () => {
@@ -134,7 +139,7 @@ function page() {
     }
     return (
         <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-white rounded w-full max-w-6xl">
-          <h1 className="text-4xl font-bold mb-4">User Dashboard</h1>
+          <h1 className="text-4xl font-bold mb-4">{username} Dashboard</h1>
     
           <div className="mb-4">
             <h2 className="text-lg font-semibold mb-2">Copy Your Unique Link</h2>{' '}
@@ -181,7 +186,7 @@ function page() {
         <p>No messages available.</p>
       ) : (
         <ul>
-          {message.messages.map((message: any, index: number , _id : string) => (
+          {message.messages.map((message: message) => (
             <MessageCard
             key={message._id}
             message={message}
@@ -195,4 +200,4 @@ function page() {
       );
 }
 
-export default page
+export default Page

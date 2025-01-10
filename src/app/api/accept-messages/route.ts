@@ -24,8 +24,8 @@ export async function POST(request :Request) {
 
 
     const userId = user._id;
-   const {acceptMessage} = await request.json();
-   try {
+    try {
+     const {acceptMessage} = await request.json();
     const updatedUser = await UserModel.findByIdAndUpdate(userId , {isAcceptingMessage:acceptMessage} , {new : true});
     if(!updatedUser) {
 
@@ -54,7 +54,7 @@ export async function POST(request :Request) {
     }
 }
 
-export async function GET(request: Request) {
+export async function GET() {
     // Connect to the database
     await dbConnect();
   
